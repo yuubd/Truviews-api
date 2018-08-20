@@ -1,1 +1,2 @@
 # Truviews-api
+npm start
