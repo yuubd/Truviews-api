@@ -44,14 +44,14 @@ app.get('/profile/:id', (req, res) => {
 });
 
 app.post('/signin', (req, res) => {
-	if (
-		req.body.email === database.users[0].email &&
-		req.body.password === database.users[0].password
-	) {
-		res.json('sucess');
-	} else {
-		res.status(400).json('error logging in');
-	}
+	database.users.forEach((user) => {
+		if (req.body.email === user.email && req.body.password === user.password) {
+			user.json();
+			return;
+		}
+	});
+	res.status(400).json('error logging in');
+	return;
 });
 
 app.post('/signup', (req, res) => {
